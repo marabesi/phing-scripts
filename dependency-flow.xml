@@ -1,0 +1,12 @@
+<!--
+Understanding dependencies with phing, this project will run
+A, B, C and D therefore is commom people think that C,B,A and D will
+be executed.
+-->
+<?xml version="1.0" encoding="utf-8"?>
+<project default="D">
+    <target name="A" />
+    <target name="B" depends="A" />
+    <target name="C" depends="B" />
+    <target name="D" depends="C,B,A" />
+</project>

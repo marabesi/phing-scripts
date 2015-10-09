@@ -1,0 +1,34 @@
+<!--
+Simple project to apply filter, create temporary files and delete them
+-->
+<project name="string filter" description="Filter test" default="cleanup">
+    <property name="target.folder" value="./javascript"/>
+    <property name="dist.folder" value="./javascript/build"/>
+    
+    <fileset id="files" dir="${target.folder}">
+        <include name="**/*.js"/>
+    </fileset>
+    
+    <target name="replace">
+        <echo msg="replacing ..."/>
+        
+        <copy todir="${dist.folder}">
+            <fileset refid="files"/>
+            <filterchain>
+                <replaceregexp>
+                    <regexp pattern="CONST" replace="TESTE"/>
+                </replaceregexp>
+            </filterchain>
+        </copy>
+        
+        <echo msg="done replacing."/>
+    </target>
+    
+    <target name="cleanup" depends="replace">
+        <echo msg="Deleting temporary folders and files ..."/>
+        <delete>
+            <fileset refid="files"/>
+        </delete>
+        <echo msg="Done deleting"/>
+    </target>
+</project>

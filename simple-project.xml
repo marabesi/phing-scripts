@@ -1,0 +1,37 @@
+<!--
+Simple project that clones a git repository, run composer to update
+ project dependencies and run unit tests with phpunit
+-->
+<?xml version="1.0" encoding="utf-8"?>
+<project name="First Example" description="Clone, phpunit" default="phpunittests">
+	<property name="appdir" value="."/>
+    <property name="repodir" value="./app"/>
+    <property name="testdir" value="./app/tests"/>
+	<property name="repo" value="https://github.com/marabesi/laravel-pagseguro.git" />
+    
+    <target name="clone">
+        <echo msg="Cloning repository ${repo} please wait"/>
+        <gitclone repository="${repo}" targetPath="${appdir}/app"/>
+    </target>
+    
+    <target name="composerupdate" depends="clone">
+        <composer composer="./composer.phar" command="install">
+            <arg value="-d"/>
+            <arg path="${repodir}" />
+        </composer>
+    </target>
+    
+    <target name="phpunittests" depends="clone, composerupdate">
+        <phpunit pharlocation="${appdir}/phpunit.phar"
+                 codecoverage="false" 
+                 bootstrap="${testdir}/bootstrap.php"
+                 haltonfailure="true"
+                 printsummary="true">
+            <batchtest>
+                <fileset dir="${testdir}">
+                    <include name="**/*Test.php"/>
+                </fileset>
+            </batchtest>
+        </phpunit>
+    </target>
+</project>

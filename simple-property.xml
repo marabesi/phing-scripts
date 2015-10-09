@@ -1,0 +1,13 @@
+<!--
+We can load properties from files or just set them in build file
+-->
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Simple property usage" default="build">
+    <property file="project.properties"/>
+    <property name="local.property" value="hello"/>
+    
+    <target name="build">
+        <echo msg="From file : ${project.name}"/>
+        <echo msg="Local : ${local.property}"/>
+    </target>
+</project>

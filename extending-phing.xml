@@ -1,0 +1,44 @@
+<!--
+Extending phing to create a custom task called Marabesi
+-->
+<?xml version="1.0" encoding="utf-8"?>
+<project name="My First task" default="build">
+    
+	<includepath classpath="/mnt/c/wamp/www/github/phing/classes"/>
+    <taskdef name="marabesi" classname="MarabesiTask"/>
+    
+    <target name="build">
+        <marabesi message="Hello World"/>
+    </target>
+</project>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
