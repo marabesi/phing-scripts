@@ -1,0 +1,20 @@
+<project default="replace">
+    <property file="replace.properties"/>
+
+    <fileset dir="${dir}" id="application">
+        <include name="*.php"/>
+    </fileset>
+
+    <target name="replace">
+        <echo msg="Replacing files"/>
+        <reflexive>
+            <fileset refid="application"/>
+            <filterchain>
+                <replaceregexp>
+                    <regexp pattern="123" replace="465"/>
+                </replaceregexp>
+            </filterchain>
+        </reflexive>
+    </target>
+</project>
+
