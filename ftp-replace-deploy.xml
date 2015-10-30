@@ -1,0 +1,26 @@
+<project description="Replace a file content and deploy it with FTP"
+         default="deploy">
+    <property file="${property.file}"/>
+    
+    <ftpdeploy name="deploy"
+               host="${ftp.host}"
+               port="${ftp.port}"
+               username="${ftp.username}"
+               password="${ftp.password}"
+               dir="${ftp.dir}"
+               passive="false"
+               mode="${ftp.mode}">
+        
+        <reflexive>
+            <fileset dir="${dir}">
+                <include name="index.php"/>
+                <include name="list.php"/>
+            </fileset>
+            <filterchain>
+                <replaceregexp>
+                    <regexp pattern="##replace" replace="${token}"/>
+                </replaceregexp>
+            </filterchain>
+        </reflexive>
+    </ftpdeploy>
+</project>
