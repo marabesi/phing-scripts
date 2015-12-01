@@ -1,0 +1,21 @@
+<project name="git checkout" default="changeOwner">
+    <property name="branch" value="master"/>
+    <property name="target" value="./"/>
+    <property name="owner" value="root"/>
+
+    <target name="changeOwner">
+        <gitcheckout
+            repository="${target}"
+            branchname="${branch}"
+            quiet="true"/>
+    </target>
+
+    <target name="chownFolder">
+        <chown user="${owner}">
+            <fileset>
+                <include name="**"/>
+                <exclude name="${target}vendor"/>
+            </fileset>
+        </chown>
+    </target>
+</project>
