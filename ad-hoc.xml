@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Adhoc task example" description="Usage of adhoc task with phing" default="helloAdHoc">
+	<target name="helloAdHoc">
+    	<adhoc-task name="marabesiAdHoc"><![CDATA[
+        	class MyTask extends Task {
+            	private $msg;
+
+            	public function setMsg($msg) {
+                	$this->msg = $msg;
+            	}
+
+            	public function main() {
+                	$this->log($this->msg);
+            	}
+        	}
+    	]]></adhoc-task>
+    	<marabesiAdHoc msg="hello"/>
+	</target>
+</project>
